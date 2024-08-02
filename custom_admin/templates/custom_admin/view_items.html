@@ -1,0 +1,54 @@
+{% extends 'custom_admin/base.html' %}
+{% block content %}
+<div class="p-2" style="height:100vh; overflow-y:scroll;">
+    <table id="viewItem" class="display dark" style="color:black;" >
+    <thead style="color:black;">
+    <tr>
+
+        <th scope="col" style="text-wrap: nowrap; text-align:center;">Item Image</th>
+      <th scope="col" style="text-wrap: nowrap;text-align:center;">Item Name</th>
+      <th scope="col" style="text-wrap: nowrap;text-align:center;">Item Price</th>
+         <th scope="col" style="text-wrap: nowrap;text-align:center;">Number of Pieces</th>
+      <th scope="col" style="text-wrap: nowrap;text-align:center;">Item Description</th>
+         <th scope="col" style="text-wrap: nowrap;text-align:center;">Item Type</th>
+        <th scope="col" style="text-wrap: nowrap;text-align:center;">Actions</th>
+    </tr>
+    </thead>
+        <tbody style="color:black;">
+         {% for i in menu_items%}
+
+
+    <tr>
+
+        <td><img src="/media/{{i.item_image}}" style="height:100px;"></td>
+      <td style="text-wrap: nowrap;text-align:center;">{{i.item_name}}</td>
+
+      <td style="text-wrap: nowrap;text-align:center;">{{i.item_price}}</td>
+        {% if i.num_pieces > 0 %}
+        <td style="text-wrap: nowrap;text-align:center;">{{i.num_pieces}}</td>
+        {% else %}
+        <td style="text-wrap: nowrap;text-align:center;">-</td>
+        {% endif %}
+      <td>{{i.item_description}}</td>
+
+        <td style="text-wrap: nowrap;text-align:center;">{{i.item_type}}</td>
+        <td>
+            <div style="display:flex;">
+            <a href="/admin/delete-item/{{i.id}}" class="btn btn-danger mr-2">Delete</a>
+            <a href="/admin/update-item/{{i.id}}" class="btn btn-success ml-2">Update</a>
+            </div>
+        </td>
+
+    </tr>
+{% endfor %}
+  </tbody>
+    </table>
+    </div>
+ {% load static %}
+    <script src="{% static 'custom_admin/js/script.js' %}"></script>
+<script>
+   $(document).ready( function () {
+    $('#viewItem').DataTable();
+} );
+</script>
+{% endblock %}

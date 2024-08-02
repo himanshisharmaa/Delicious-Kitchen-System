@@ -1,0 +1,69 @@
+ {% extends "account/base.html" %}
+ {% block content %}
+<div class="form-container-register login_right">
+        <h2 class="text-center">Register</h2>
+
+        <form  method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% include 'account/message.html' %}
+            <div class="form-group">
+            <label for="f_name">First Name</label>
+            <input type="text" id="f_name" class="form-control" name="f_name" style="
+    text-transform: uppercase;
+" required>
+          </div>
+            <div class="form-group">
+            <label for="l_name">Last Name</label>
+            <input type="text" id="l_name" class="form-control" name="l_name" style="
+    text-transform: uppercase;
+" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" class="form-control" name="mail" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" class="form-control" name="passwd" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Re-Enter Password</label>
+            <input type="password" id="v_password" class="form-control" name="rePasswd" required>
+          </div>
+            <div class="form-group">
+            <label for="contactNO">Contact No</label>
+            <input type="tel" id="contactNO" class="form-control" name="contact" maxlength="10" required>
+          </div>
+          <div class="form-group">
+            <label for="stAddress">Street Address</label>
+            <input type="text" id="stAddress" class="form-control" style="
+    text-transform: uppercase;" name="stAddress" required>
+          </div>
+           <div class="form-group">
+            <label for="landmarks">Near By Landmarks</label>
+            <input type="text" id="landmarks" class="form-control" style="
+    text-transform: uppercase;" name="landmarks" required>
+          </div>
+          <div class="form-group">
+            <label for="state">State/Union Territories</label>
+              <select id="state" class="form-control" aria-label="Default select example" name="state">
+                <option selected>Select State/Union Territories</option>
+
+              </select>
+          </div>
+           <div class="form-group">
+            <label for="zipCode">ZipCode/PostCode</label>
+            <input type="text" id="zipCode" class="form-control" name="zipCode" required>
+          </div>
+            <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
+          </div>
+          <div class="form-group">
+             <span>Already have an account? <a href="/">Login</a></span></div>
+
+
+        </form>
+</div>
+ {% load static %}
+ <script src="{% static 'account/js/script.js' %}"></script>
+{% endblock %}

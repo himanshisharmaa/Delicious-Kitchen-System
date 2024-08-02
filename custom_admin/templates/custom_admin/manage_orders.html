@@ -1,0 +1,66 @@
+{% extends 'custom_admin/base.html' %}
+{% block content %}
+<div class="container cart">
+    <div class="mt-2" style="    width: 58%;
+    border: 3px solid #55046e;
+    padding: 11px;
+    margin: auto;
+    border-radius: 10px;
+    background: antiquewhite;"><h2 style="text-align:center; font-family:cursive; text-transform:uppercase;"> Manage Orders</h2></div>
+  <div id="menu_items"  style="width:100%;">
+    {% for order in order_details %}
+    {% if order.order_status != 'Delivered' %}
+    <div class="order-item  mt-2" style="border:solid 3px; padding:10px;">
+      <div style="display:flex; justify-content:space-between;">
+          <p>Order ID: {{ order.order_id }}</p>
+          <p>Order Status: {{ order.order_status }}</p>
+          <p>{{ order.order_placed_time }}</p>
+          </div>
+      <div class="cart-items" >
+        {% for k,item in order.cart_items.items %}
+
+            <div  class="product_item" style=" display: flex;width: 40%;height: 100%;
+                overflow: hidden;
+
+                margin-bottom: 20px;
+            ">
+
+                      <img src='{{item.item_image}}' style="width: 35%;
+    height: 100%;
+    object-fit: contain;">
+
+                      <div class="product-info">
+
+                        <h3 class="product-name">{{item.item_name}}</h3>
+
+                        <h4  class="product-price">₹ {{item.item_price}} x{{item.quantity}}</h4>
+
+                      </div>
+
+                    </div>
+        {% endfor %}
+      </div>
+
+      <p><h4 style="text-align: end;padding-right: 40px;">Total Price: ₹{{ order.totalAmount }}</h4></p>
+        <form method="post" action="/admin/update-status/{{ order.order_id }}">
+        {% csrf_token %}
+        <label for="status">Select status:</label>
+        <select id="status" name="status">
+          <option value="Received">Received</option>
+          <option value="Prepared">Prepared</option>
+          <option value="Out for Delivery">Out for Delivery</option>
+          <option value="Delivered">Delivered</option>
+        </select>
+        <button type="submit">Submit</button>
+            {% include 'account/message.html' %}
+      </form>
+    </div>
+
+      {% endif %}
+    {% endfor %}
+
+  </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends 'menu/base.html'  %}
+{% block content %}
+
+        <!-- Page Header End -->
+
+
+        <!-- Contact Start -->
+        <div class="contact">
+            <div class="container">
+                <div class="section-header text-center">
+
+                    <h2>Contact US For Any Query</h2>
+                </div>
+                <div class="row align-items-center contact-information">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="contact-info">
+                            <div class="contact-icon">
+                                <i class="fa fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h3>Address</h3>
+                                <p>11/89, Block 11, Geeta Colony, Delhi, 110031</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="contact-info">
+                            <div class="contact-icon">
+                                <i class="fa fa-phone-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h3>Call Us</h3>
+                                <p>+91 9718870631</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="contact-info">
+                            <div class="contact-icon">
+                                <i class="fa fa-envelope"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h3>Email Us</h3>
+                                <p>kitchendelicious791@gmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+        </div>
+<div class="container">
+                <div class=" row contact-form">
+
+                    <div class="container">
+                        <div id="success"></div>
+                        <form class="col-6 mx-auto card p-3 shadow-lg" name="sentMessage" method="post">
+                            {% csrf_token %}
+                             {% include 'account/message.html' %}
+                            <div class="control-group">
+                                <input type="text" class="form-control" value="{{request.user.first_name}} {{request.user.last_name}}" id="name" name="name" placeholder="Your Name" required="required" data-validation-required-message="Please enter your name" readonly>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="control-group">
+                                <input type="email" class="form-control" id="email" value={{request.user}} name="mail_id" placeholder="Your Email" required="required" data-validation-required-message="Please enter your email" readonly>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="control-group">
+                                <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" required="required" data-validation-required-message="Please enter a subject" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="control-group">
+                                <textarea class="form-control" id="message" name="message" placeholder="Message" required="required" data-validation-required-message="Please enter your message"></textarea>
+                                <p class="help-block text-danger"></p>
+                            </div>
+
+                            <button class="btn btn-secondary"  style="background-color:brown;" type="submit">Send Message</button>
+
+                        </form>
+                    </div>
+                </div>
+</div>
+        </div>
+{% endblock %}

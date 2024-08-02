@@ -1,0 +1,136 @@
+{% extends "menu/base.html"%}
+
+{%  block content %}
+
+
+<section class="header-main ">
+			<div class="container"  style="background:transparent;">
+		<div class="row align-items-center" >
+			<div class="col-lg-2 col-4">
+
+			</div>
+			<div class="col-lg-6 col-sm-12 mt-1">
+				<form id="search-form" class="search">
+                    {% csrf_token %}
+					<div class="input-group w-100">
+						<input type="text" id="search-input" name="search" class="form-control" placeholder="Search">
+						<div class="input-group-append">
+						  <button class="btn btn-primary" type="submit">
+							<i class="fa fa-search"></i>
+						  </button>
+						</div>
+                    <button class="btn btn-secondary ml-1" id="close" style="background-color: #3e4444;"
+                        onclick="setButtonClick('Close')"> <i class="fa fa-close"></i></button>
+                        <input type="hidden" id="closebutton" class="form-control mt-4 col-lg-4 mr-3" name="">
+
+					</div>
+                   </form>
+                <div id="results-box" class="results-card not-visible">
+
+                </div>
+			</div> <!-- col.// -->
+
+		</div> <!-- row.// -->
+			</div> <!-- container.// -->
+		</section>
+<div style="
+display:none;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+"  id="addToCartText"></div>
+<div class="container cart mb-3" style="
+    height: 75vh;
+    overflow-y: scroll;
+    overflow-x:hidden;
+    border: 6px groove brown;
+">
+
+<div id="menu_items">
+  {% for item in items_display %}
+  <hr>
+  <div class="menu-item">
+    <div class="item-info">
+      {% load static %}
+
+      <img src="{% static 'menu/images/icons8-veg-48.png' %}" style="height:30px;">
+
+        <h3 id="item_name_{{item.id}}" style="color:brown;" class="item-name">{{item.item_name}}</h3>
+        {% if item.num_pieces > 0 %}
+        <div style="display:flex;"><p id="item_price_{{item.id}}" class="item-price">₹{{item.item_price}}</p><p>({{item.num_pieces}} pieces)</p></div>
+        {% else %}
+        <div style="display:flex;"><p id="item_price_{{item.id}}" class="item-price">₹{{item.item_price}}</p></div>
+        {% endif %}
+      <p class="item-description">{{item.item_description}}</p>
+    </div>
+    <div style="display:grid;">
+      <div class="item-image" style="width: 100%;">
+        <img id="item_image_{{item.id}}" src="/media/{{item.item_image}}" alt="Item Image">
+      </div>
+      <div class="form-control" id="add_cart_{{item.id}}" style="width: 150px;
+  display: grid;
+  justify-self: center;
+ background: brown;">
+        <button type="button" class="btn" onclick="add_to_cart('{{item.id}}')">ADD</button>
+      </div>
+      <div class="form-control" style="
+    width: min-content;
+    display: none;
+    justify-self: center;
+" id="quantity_{{item.id}}">
+       <button type="button" class="btn" onclick="decreaseQuantity('{{item.id}}')">-</button>
+        <input type="text" id="quantity_div_{{item.id}}" class="" value="1" readonly
+          style="border: none;text-align: center;width: 30px;">
+
+           <button type="button" class="btn" onclick="increaseQuantity('{{item.id}}')">+</button>
+      </div>
+    </div>
+  </div>
+
+    <input type="hidden" id="dataSelected">
+
+  {% endfor %}
+  <hr>
+
+
+</div>
+
+
+ <div id="displayCart" style="display: none; position:sticky;" class="order-summary">
+        <span>Order Summary</span>
+
+
+<div  class='container'>
+        <table class="table">
+      <thead>
+        <tr>
+
+          <th scope="col">Item</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Price</th>
+        </tr>
+      </thead>
+      <tbody id="order_body">
+
+
+      </tbody>
+    </table>
+        <a href="/menu/cart/">Show Cart</a>
+
+</div>
+
+
+
+
+      </div>
+</div>
+
+
+{% load static %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{% static 'menu/js/script.js' %}"></script>
+<script>
+
+</script>
+{% endblock %}
+

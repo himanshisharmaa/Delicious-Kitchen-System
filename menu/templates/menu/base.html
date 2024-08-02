@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'menu/css/cart.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'menu/css/checkout.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'menu/css/style.css' %}">
+	<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <title>Menu</title>
+</head>
+<body>
+<div class="bg" style="background-image:url({% static 'account/images/tortilla-wrap-with-falafel-fresh-salad-vegan-tacos-vegetarian-healthy-food_2829-6193.jpg' %})">
+	<header class="section-header">
+
+		<nav class="navbar navbar-expand navbar_custom  justify-content-between;" >
+        <a href="/menu/" class="navbar-brand">Delicious Kitchen</a>
+        <div class="navbar-nav ml-auto" >
+
+			<div class="widget-header  mr-3">
+				<a href="#" class="icon icon-lg rounded-circle border"><i class="fa fa-shopping-cart"></i></a>
+				<span id="cartValue" class="badge badge-pill badge-danger notify">0</span>
+			</div>
+			<a class="nav-item nav-link" href="/menu/contact-us/">Contact Us</a>
+			<a class="nav-item nav-link" href="/menu/about-us/">About Us</a>
+            <div class="widget-header icontext mr-3">
+                <div class="dropdown" >
+                  <button class="btn"  type="button" id="dropdownMenuButton"  style=" background:transparent;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-user mr-1" style="color:white;"></i><span  style="color:white;text-transform:uppercase;">{{request.user.first_name}}
+                            {{request.user.last_name}}</span>
+                  </button>
+                  <div class="dropdown-menu" style="background:black;" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="/menu/profile/">Profile</a>
+                    <a class="dropdown-item" href="/menu/orders/">My Orders</a>
+
+                  </div>
+                </div>
+
+			</div>
+            {% if request.user.is_authenticated %}
+			<a class="nav-item nav-link" href="/menu/logout/">Logout</a>
+            {% else %}
+            <a class="nav-item nav-link" href="/">Login</a>
+            {% endif %}
+        </div>
+    </nav>
+		 <!-- header-main .// -->
+		</header>
+
+
+
+		{% block content %}
+
+		{% endblock %}
+
+
+    </div>
+	<div class="footer">
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-7">
+                        <div class="row d-flex justify-content-center" >
+                            <div class="col-md-6" >
+                                <div class="footer-contact">
+                                    <h2>Our Address</h2>
+                                    <p><i class="fa fa-map-marker-alt"></i>11/89, Block 11, Geeta Colony, Delhi, 110031</p>
+                                    <p><i class="fa fa-phone-alt"></i>+91 9718870631</p>
+                                    <p><i class="fa fa-envelope"></i>kitchendelicious791@gmail.com</p>
+                                    <div class="footer-social">
+                                        <a href=""><i class="fab fa-twitter"></i></a>
+                                        <a href="https://www.facebook.com/SachTechSol/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                        <a href=""><i class="fab fa-instagram"></i></a>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="copyright">
+                <div class="container">
+                    <p>Copyright &copy; <a href="/menu/">DELICIOUS KITCHEN</a>, All Right Reserved.</p>
+
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+
+
+
+
+ <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
+
+
+
+
+        </body>
+</html>

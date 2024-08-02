@@ -1,0 +1,150 @@
+{% extends 'custom_admin/base.html' %}
+{% block content %}
+    <div id="content-wrapper" class="d-flex flex-column">
+      <div id="content">
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+          <h2 class="text-center">AdminPage</h2>
+        </nav>
+        <div class="container-fluid">
+
+          <div class="row">
+            <div class="col-xl-4 col-md-4 mb-4">
+              <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total Earnings</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">RS {{ income }}</div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xl-4 col-md-4 mb-4">
+              <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Delivered</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">{{ completed_total }}</div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-comments fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xl-4 col-md-4 mb-4">
+              <div class="card border-left-danger shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Pending Orders</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">{{ pending_total }}</div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-comments fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xl-6 col-lg-6">
+              <div class="card shadow mb-4" style="
+    background: linear-gradient(180deg, #2f94a3, #80ffd1);
+">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Maximum Menu Items Bought</h6>
+                </div>
+                <div class="card-body">
+                  <div class="chart-pie pt-4 pb-2">
+                    <canvas id="maxItems"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-6 col-lg-6">
+              <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Order in Line</h6>
+                </div>
+                <div class="card-body">
+                     <div class="table-responsive" style="height: 300px; overflow-y: scroll;">
+                <table class="table table-bordered" style="background-color:bisque;" id="dataTable" width="100%" cellspacing="">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>User Name</th>
+                            <th>Timestamp</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% if order_details %}
+                        <!-- Iterate through order_details and display each order -->
+                        {% for order in order_details %}
+
+                            <tr>
+                                <td>{{ order.order_id }}</td>
+                                <td>{{ order.user_name }}</td>
+                                <td>{{ order.timestamp }}</td>
+                            </tr>
+                    {% endfor %}
+                        {% else %}
+                        <tr>
+                            <td colspan="3" style="text-align:center;">No Orders Yet</td>
+                        </tr>
+                        {% endif %}
+
+                    </tbody>
+                </table>
+            </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+             </div>
+          </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+   var menu_item_names = {{ menu_item_names|safe }};
+    var menu_item_counts = {{ menu_item_counts|safe }};
+
+    // Create a new bar chart
+    var ctx = document.getElementById('maxItems').getContext('2d');
+    var barChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: menu_item_names,
+            datasets: [{
+                label: 'Menu Item Counts',
+                data: menu_item_counts,
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+
+{% endblock %}

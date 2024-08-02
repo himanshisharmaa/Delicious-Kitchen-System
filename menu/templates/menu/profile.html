@@ -1,0 +1,23 @@
+{% extends 'menu/base.html' %}
+{% block content %}
+
+
+  <div class="container-profile pb-4">
+
+    <div class="profile-header">
+        {% load static %}
+      <img class="profile-picture" src="{% static 'menu/images/user.png' %}" alt="Profile Picture">
+      <div class="profile-name">{{request.user.first_name}} {{request.user.last_name}}</div>
+    </div>
+
+    <div class="profile-details"  >
+
+        <div style="display:grid; justify-content:center;">
+      <p><strong>Email:</strong> {{request.user}}</p>
+
+      <p><strong>Address:</strong> {{user_details.address}}</p>
+      <p><strong>Phone Number:</strong> {{user_details.phone_number}}</p>
+       </div>
+        </div>
+  </div>
+{% endblock %}

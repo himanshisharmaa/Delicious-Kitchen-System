@@ -1,0 +1,45 @@
+{% extends 'custom_admin/base.html' %}
+{% block content %}
+    <div class="container mt-5">
+        <form class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <h2>UPDATE ITEM TO THE MENU</h2>
+          {% include 'account/message.html' %}
+          <hr>
+
+          <div class="mb-3">
+            <label for="item_name" class="form-label">Item Name</label>
+            <input type="text" value='{{item.item_name}}' name="item_name" class="form-control" id="item_name">
+          </div>
+
+          <div class="mb-3">
+            <label for="item_price" class="form-label">Item Price</label>
+            <input type="number" value={{item.item_price}} name="item_price" class="form-control" id="item_price">
+          </div>
+          <div class="mb-3">
+            <label for="num_pieces" class="form-label">Number of Pieces</label>
+            <input type="number" value={{item.num_pieces}} name="num_pieces" class="form-control" id="num_pieces">
+          </div>
+          <div class="mb-3">
+            <label for="item_description" class="form-label">Item Description</label>
+            <textarea class="form-control"  id="item_description" name="item_description">{{item.item_description}}</textarea>
+          </div>
+          <div class="mb-3">
+            <label for="item_image" class="form-label">Item Image</label>
+            <input type="file" name="item_image" class="form-control" id="item_image" >
+          </div>
+          <div class="mb-3">
+            <label for="item_type" class="form-label">Item Type</label>
+            <input type="hidden" id="hiddenType" value={{item.item_type}}>
+            <select id="item_type" name="item_type" class="form-control" aria-label="Default select example" >
+            <option>Select Item Type</option>
+
+          </select>
+          </div>
+
+          <button type="submit" class="btn btn-secondary">Update Item</button>
+        </form>
+    </div>
+{% load static %}
+<script src="{% static 'custom_admin/js/script.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'custom_admin/base.html' %}
+{% block content %}
+    <div class="container mt-5">
+        <form class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <h2>ADD ITEM TO THE MENU</h2>
+          {% include 'account/message.html' %}
+          <hr>
+
+          <div class="mb-3">
+            <label for="item_name" class="form-label">Item Name</label>
+            <input type="text" name="item_name" class="form-control" id="item_name" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="item_price" class="form-label">Item Price</label>
+            <input type="number" name="item_price" class="form-control" id="item_price" required>
+          </div>
+          <div class="mb-3">
+            <label for="num_pieces" class="form-label">Number of Pieces</label>
+            <input type="number" name="num_pieces" class="form-control" id="num_pieces" value="0" required>
+          </div>
+          <div class="mb-3">
+            <label for="item_description" class="form-label">Item Description</label>
+            <textarea class="form-control" id="item_description" name="item_description" required></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="item_image" class="form-label">Item Image</label>
+            <input type="file" name="item_image" class="form-control" id="item_image" required>
+          </div>
+          <div class="mb-3">
+            <label for="item_type" class="form-label">Item Type</label>
+            <select id="item_type" name="item_type" class=" form-control" aria-label="Default select example" required>
+            <option selected>Select Item Type</option>
+
+          </select>
+          </div>
+
+          <button type="submit" class="btn btn-secondary">Submit</button>
+        </form>
+    </div>
+{% load static %}
+<script src="{% static 'custom_admin/js/script.js' %}"></script>
+{% endblock %}

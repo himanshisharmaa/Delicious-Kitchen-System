@@ -1,0 +1,23 @@
+{% extends 'menu/base.html' %}
+{% block content%}
+
+
+  <div class="container-profile">
+
+    <div class="profile-header">
+      <div class="success-animation">
+    <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" /><path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" /></svg>
+          <br> <span><h2>Thank you for Ordering</h2></span>
+        <span> Your order with <span style="color:blue;">{{order_details.order_id}}</span> has been placed successfully on <span style="color:blue;">{{order_details.order_placed_time}}</span></span>
+    </div>
+    </div>
+
+    <div class="profile-details" style="display:flex; justify-content:space-between; color:white;" >
+
+      <button type="button" class="btn btn-secondary" style="width: 30%;
+    background: linear-gradient(45deg, #9f2121, transparent);"><a href="/menu/orders/" style="color:white;">Go To Order</a></button>
+      <button type="button" class="btn btn-secondary" style="width: 30%;
+    background: linear-gradient(45deg, #9f2121, transparent);"><a href="/menu/" style="color:white;">Go To Menu</a></button>
+    </div>
+  </div>
+{% endblock %}

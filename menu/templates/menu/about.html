@@ -1,0 +1,28 @@
+{% extends 'menu/base.html' %}
+{% block content %}
+{% load static %}
+    <section class="pb_section" id="section-about" style=" padding-bottom: 0px !important;">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="row">
+              <div class="col">
+                <p><img src="{% static 'account/images/melissa-walker-horn-wcDru6t-aCg-unsplash.jpg' %}" alt="Instant Image" class="img-fluid"></p>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-lg-4 mt-3">
+            <h2 class="mb-4 text-uppercase pb_letter-spacing-1">DELICIOUS KITCHEN</h2>
+            <p style="font-size: 18px; font-weight: bold;">Hungry?&nbsp; You're in the right place !</p>
+            <p style="text-align: justify; font-size: 18px;">For us, it's not just about bringing you your favourite food from the restaurant to your home. It's about making a connection, which is why we sit down with the chefs, dreaming up menus that will arrive fresh and full of flavour.</p>
+            <p style="font-size: 18px; font-weight: bold;">Try us!</p>
+
+
+            <p><a href="/menu/" class="smoothscroll text-danger text-uppercase">See our menu <i class="ion-arrow-down-c"></i></a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+{% endblock %}

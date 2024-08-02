@@ -1,0 +1,128 @@
+{% extends 'menu/base.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'menu/css/order_detail.css' %}">
+<div class="container cart">
+  <div id="menu_items"  style="width:100%;">
+    {% if order.order_status == 'Delivered' %}
+    <div class="order-item  mt-2" style="border:solid 3px green; padding:10px;">
+    {% else %}
+        <div class="order-item  mt-2" style="border:solid 3px; padding:10px;">
+            {% endif %}
+        <p>Order ID: <span style="color:blue;"> <a href="/menu/order-{{order.order_id}}/">{{ order.order_id }}</a></span></p>
+
+
+      <div class="cart-items" >
+        {% for k,item in order.cart_items.items %}
+            <div  class="product_item" style=" display: flex;width: 40%;height: 100%;
+    overflow: hidden;
+
+    margin-bottom: 20px;
+">
+
+                      <img src='{{item.item_image}}' style="width: 35%;
+    height: 100%;
+    object-fit: contain;">
+
+                      <div class="product-info">
+
+                        <h3 class="product-name">{{item.item_name}}</h3>
+
+                        <h4  class="product-price">₹ {{item.item_price}} x{{item.quantity}}</h4>
+
+                      </div>
+
+                    </div>
+        {% endfor %}
+      </div>
+        <div style="display:flex;justify-content:space-between;">
+            <p><h7>Order Status: <span style="color:blue;">{{ order.order_status }}</span></h7></p>
+      <p><h5>Total Price: ₹{{ order.totalAmount }}</h5></p>
+            </div>
+    </div>
+
+
+  </div>
+</div>
+
+
+
+
+<div class="container">
+  <div class="mt-4">
+      <h4 style="width:57%;text-align:right;"><mark style="background-color: antiquewhite;  font-family:cursive;">Track Order</mark></h4>
+    </div>
+  {% if order_data.Received %}
+    <div class="timeline">
+  <div class="container_custom left">
+    <div class="content">
+      <h2>Received</h2>
+      <p>{{order_data.Received}}</p>
+    </div>
+  </div>
+    </div>
+{% else %}
+<div class="container_custom left">
+    <div class="content">
+      <h2>Received</h2>
+      <p>{{order_data.Received}}</p>
+    </div>
+  </div>
+{% endif %}
+{% if order_data.Prepared %}
+<div class="timeline" >
+  <div class="container_custom right">
+    <div class="content">
+      <h2>Prepared</h2>
+      <p>{{order_data.Prepared}}</p>
+    </div>
+  </div>
+  </div>
+{% else %}
+<div class="container_custom right">
+    <div class="content">
+      <h2>Prepared</h2>
+      <p>{{order_data.Prepared}}</p>
+    </div>
+  </div>
+{% endif %}
+{% if order_data.OutforDelivery %}
+<div class="timeline">
+  <div class="container_custom left">
+    <div class="content">
+      <h2>Out For Delivery</h2>
+      <p>{{ order_data.OutforDelivery }}</p>
+    </div>
+  </div>
+  </div>
+{% else %}
+<div class="container_custom left">
+    <div class="content">
+      <h2>Out For Delivery</h2>
+      <p>{{ order_data.OutforDelivery }}</p>
+    </div>
+  </div>
+{% endif %}
+{% if order_data.Delivered %}
+<div class="timeline" >
+  <div class="container_custom right">
+    <div class="content">
+      <h2>Delivered</h2>
+      <p>{{order_data.Delivered}}</p>
+    </div>
+  </div>
+  </div>
+{% else %}
+<div class="container_custom right">
+    <div class="content">
+      <h2>Delivered</h2>
+      <p>{{order_data.Delivered}}</p>
+    </div>
+  </div>
+{% endif %}
+
+</div>
+
+</div>
+
+{% endblock %}

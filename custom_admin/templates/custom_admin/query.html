@@ -1,0 +1,38 @@
+{% extends 'custom_admin/base.html' %}
+{% block content %}
+<div class="container">
+    <div class="mt-2" style="    width: 58%;
+    border: 3px solid #55046e;
+    padding: 11px;
+    margin: auto;
+    border-radius: 10px;
+    background: antiquewhite;"><h2 style="text-align:center; font-family:cursive; text-transform:uppercase;"> User Queries</h2></div>
+    <div class="mt-3">
+    <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+        <th scope="col">Name </th>
+      <th scope="col">Email ID</th>
+      <th scope="col">Subject</th>
+         <th scope="col">Message</th>
+    </tr>
+    </thead>
+         {% for query in queries%}
+    <tbody>
+
+    <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td style="text-transform:uppercase;">{{query.nameOfUser}}</td>
+            <td>{{query.email_id}}</td>
+            <td>{{query.subjectOfQuery}}</td>
+            <td>{{query.queryMessage}}</td>
+    </tr>
+{% endfor %}
+  </tbody>
+    </table>
+        </div>
+    </div>
+ {% load static %}
+    <script src="{% static 'custom_admin/js/script.js' %}"></script>
+{% endblock %}

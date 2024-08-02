@@ -1,0 +1,132 @@
+body, html {
+      height: 100%;
+    }
+
+
+.bg {
+  /* The image used */
+
+  /* Full height */
+height:100%;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+    .form-container-login {
+    color: white;
+  padding: 50px 20px; /* Adjust padding */
+  margin: 20px; /* Adjust margin */
+  transform: translate(-50%, -50%);
+  border-radius: 8px;
+  background-color: brown;
+  box-shadow: 1px 1px 10px rgb(0 7 58);
+    }
+
+    .form-container-register {
+    color: white;
+  padding: 50px 20px; /* Adjust padding */
+  margin: 20px; /* Adjust margin */
+  transform: translate(-50%, -26%);
+  border-radius: 8px;
+  background-color: #005f7b;
+  box-shadow: 1px 1px 10px rgb(0 7 58);
+    }
+    .form-container-login a{
+    color:#25e0e0;
+    }
+     .form-container-register a{
+    color:#25e0e0;
+    }
+    .login_left{
+      height: 100vh;
+    }
+    .login_right{
+      background-image: linear-gradient(177deg, #bd3d00, #c1623a, #546471a6);
+      box-shadow: 5px 10px 18px #12271d9e;
+    }
+
+
+/* Split the screen in half */
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+
+  padding-top: 20px;
+}
+.left, .right {
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* Hide scrollbar for Chrome, Safari, and Opera */
+.left::-webkit-scrollbar, .right::-webkit-scrollbar {
+  display: none;
+}
+/* Control the left side */
+.left {
+  left: 0;
+
+}
+
+/* Control the right side */
+.right {
+  right: 0;
+
+}
+
+/* If you want the content centered horizontally and vertically */
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width:65%;
+
+  text-align: center;
+}
+
+/* Style the image inside the centered container, if needed */
+.centered img {
+  width: 150px;
+  border-radius: 50%;
+}
+
+
+/* Center the avatar image inside this container */
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+
+/* Avatar image */
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
+
+/* Add padding to containers */
+.container {
+  padding: 16px;
+}
+
+/* The "Forgot password" text */
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+    display: block;
+    float: none;
+  }
+  .cancelbtn {
+    width: 100%;
+  }
+}
