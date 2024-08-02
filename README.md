@@ -1,6 +1,9 @@
 # Delicious-Kitchen-System
 Delicious Kitchen System is a food ordering website build using Django Framework.
 
+## Install the packages using requirements.txt with following command:
+        "pip install -r requirements.txt"
+
 ## How to use the website?
 1. User registration and login:
 To create an account click on register. Fill in the details and  create and account. Then navigate back to login page and login using the email id and the password that has been created while registering.
