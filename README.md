@@ -21,3 +21,4 @@ To access the admin page, first create django superuser using the following comm
     "python manage.py createsuperuser"
 After creating the superuser account go back to login page and login with the credentials that  have been created. On admin page we have dashboars containing pending orders,orders in line and many options on the sidebar like manage orders, pending orders, completed orders.
 The admin manages the order for the user by updating the delivery progress like order received, order prepared, order out for delivery and order delivered.
+The admin can add or update the items to the menu.
