@@ -13,7 +13,7 @@ from django.utils import timezone
 # Create your views here.
 @login_required(login_url='/')
 def adminPanel(request):
-    received_orders = Order.objects.filter(order_status='Received')
+    received_orders = Order.objects.filter(order_status='Received').order_by('-order_placed_time')
 
     # Format the order details for display in the table
     order_details = []
@@ -108,7 +108,7 @@ def update_item(request,id):
     return render(request,'custom_admin/update_item.html',context)
 
 def manage_orders(request):
-    querySet=Order.objects.all()
+    querySet = Order.objects.all().order_by('-order_placed_time')
     for i in querySet:
         i.cart_items=json.loads(i.cart_items)
 
@@ -136,14 +136,14 @@ def update_status(request,id):
 
 
 def pending_orders(request):
-    querySet = Order.objects.all()
+    querySet = Order.objects.all().order_by('-order_placed_time')
     for i in querySet:
         i.cart_items = json.loads(i.cart_items)
     context = {'order_details': querySet}
     return render(request,'custom_admin/pending_orders.html',context)
 
 def completed_orders(request):
-    querySet = Order.objects.all()
+    querySet = Order.objects.all().order_by('-order_placed_time')
     for i in querySet:
         i.cart_items = json.loads(i.cart_items)
     context = {'order_details': querySet}
