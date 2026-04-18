@@ -118,9 +118,10 @@ function cartDetails(){
 function setButtonClick(buttonName) {
         document.getElementById('closebutton').value = buttonName;
     }
-$( function() {
-
-    $( "#search-input" ).autocomplete({
-      source:"search",
-    });
-  } );
+$(function() {
+    if ($.fn.autocomplete) {
+        $("#search-input").autocomplete({
+            source: "search",
+        });
+    }
+});

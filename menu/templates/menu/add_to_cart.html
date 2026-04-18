@@ -17,7 +17,7 @@
 
           <span>Item Total</span>
 
-          <span id="totalItemPrice">₹ </span>
+          <span id="totalItemPrice">Rs. </span>
 
         </p>
 
@@ -33,21 +33,21 @@
 
           <span>Delivery Fee</span>
 
-          <span>₹ 40</span>
+          <span>Rs. 40</span>
 
         </p>
         <p>
 
           <span>Platform Fee</span>
 
-          <span>₹ 5</span>
+          <span>Rs. 5</span>
 
         </p>
         <p>
 
           <span>GST and Restaurant Charges</span>
 
-          <span>₹ 10</span>
+          <span>Rs. 10</span>
 
         </p>
                 <hr style="border: 1px solid black;"/>
@@ -55,7 +55,7 @@
 
           <span>To Pay</span>
 
-          <span id="totalPrice">₹</span>
+          <span id="totalPrice">Rs.</span>
             <input type="hidden"  id="hiddenPrice" name="total_price" value="">
         </p>
 <!--        <a href="/menu/checkout/">Proceed to Checkout</a>-->
@@ -67,95 +67,109 @@
 
 </div>
 {% load static %}
-<section id="scrollTarget" class="bg" style="background-image:url({% static 'account/images/tortilla-wrap-with-falafel-fresh-salad-vegan-tacos-vegetarian-healthy-food_2829-6193.jpg' %})">
-
-<div class="cart " style="justify-content:center;">
-    <div class="mt-3" style="
-    display: flex;
-    justify-content: center;
-">
-<div class="card mb-3" style="
-    width: 65%;
-">
+<section id="scrollTarget" style="background-image:url({% static 'account/images/tortilla-wrap-with-falafel-fresh-salad-vegan-tacos-vegetarian-healthy-food_2829-6193.jpg' %}); background-size:cover; background-position:center; padding: 40px 0;">
 
   <div class="container">
-      <div>
-      <div style="display:flex;justify-content:space-between;">
-                   <div class="col-50">
-            <h3>Enter Address</h3>
-            <label for="fullName"><i class="fa fa-user"></i> Full Name</label>
-            <input type="text" class="mb-3 " style="text-transform:uppercase;" id="fullName" name="full_name" >
-            <label for="email"><i class="fa fa-envelope"></i> Email</label>
-            <input type="text" class="mb-3" id="email" name="email">
-                       <label for="ph"><i class="fa fa-envelope"></i> Phone Number</label>
-            <input type="text" class="mb-3" id="ph" name="ph_num">
-            <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
-            <input type="text" class="mb-3 " id="adr" style="text-transform:uppercase;" name="address" >
-            <label for="city"><i class="fa fa-institution"></i> City</label>
-            <input type="text" class="mb-3 " id="city" style="text-transform:uppercase;"  name="city">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-8 col-sm-11">
+        <div class="card shadow-lg p-4" style="border-radius:12px; font-family:cursive;">
 
-            <div class="row">
+          <h3 class="text-center mb-4" style="color:brown;">Enter Delivery Address</h3>
 
-              <div class="col-50">
-                <label for="zip">Zip</label>
-                <input type="text" class="mb-3  " id="zip" name="zip">
-              </div>
+          <div class="form-group">
+            <label for="fullName">
+              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" style="vertical-align:-0.125em;"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.029 10 8 10c-2.029 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/></svg>
+              Full Name
+            </label>
+            <input type="text" class="form-control" style="text-transform:uppercase;" id="fullName" name="full_name" placeholder="Your full name">
+          </div>
 
+          <div class="form-group mt-2">
+            <label for="email">
+              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" style="vertical-align:-0.125em;"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.758 2.855L15 11.114V5.383zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.731z"/></svg>
+              Email
+            </label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="your@email.com">
+          </div>
+
+          <div class="form-group mt-2">
+            <label for="ph">
+              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" style="vertical-align:-0.125em;"><path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/></svg>
+              Phone Number
+            </label>
+            <input type="tel" class="form-control" id="ph" name="ph_num" placeholder="+91 XXXXXXXXXX">
+          </div>
+
+          <div class="form-group mt-2">
+            <label for="adr">
+              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" style="vertical-align:-0.125em;"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm9 1.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4a.5.5 0 0 0-.5.5zM9 8a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4A.5.5 0 0 0 9 8zm1 2.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 0-1h-3a.5.5 0 0 0-.5.5zm-1 2C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 0 2 14h6.96c.026-.163.04-.33.04-.5zM5 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>
+              Address
+            </label>
+            <input type="text" class="form-control" id="adr" style="text-transform:uppercase;" name="address" placeholder="House no, Street, Area">
+          </div>
+
+          <div class="row mt-2">
+            <div class="col-7 form-group">
+              <label for="city">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" style="vertical-align:-0.125em;"><path d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022zM6 8.694 1 10.36V15h5V8.694zM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5V15z"/><path d="M2 11h1v1H2v-1zm2 0h1v1H4v-1zm-2 2h1v1H2v-1zm2 0h1v1H4v-1zm4-4h1v1H8V9zm2 0h1v1h-1V9zm-2 2h1v1H8v-1zm2 0h1v1h-1v-1zm2-2h1v1h-1V9zm0 2h1v1h-1v-1zM8 7h1v1H8V7zm2 0h1v1h-1V7zm2 0h1v1h-1V7zM8 5h1v1H8V5zm2 0h1v1h-1V5zm2 0h1v1h-1V5zm0-2h1v1h-1V3z"/></svg>
+                City
+              </label>
+              <input type="text" class="form-control" id="city" style="text-transform:uppercase;" name="city" placeholder="Delhi">
             </div>
-<!--                       <button type="submit" class="btn btn-secondary">Submit</button>-->
-<div>
-                        <div style="
-    display: flex;
-    justify-content: center;
-
-">
-                       <button  onclick="makePayment();" class="btn btn-secondary" style="
-    width: 75%;
-    background: linear-gradient(45deg, #b52f2f, transparent);
-    border-radius: 20px;
-">Make Payment</button>
-                            </div>
-    </div>
-                                     </div>
-
+            <div class="col-5 form-group">
+              <label for="zip">Zip Code</label>
+              <input type="text" class="form-control" id="zip" name="zip" placeholder="110031">
             </div>
-      </div>
-  </div>
-</div>
+          </div>
 
+          <div class="text-center mt-4">
+            <button onclick="makePayment();" class="btn" style="width:80%; background:linear-gradient(45deg,#b52f2f,#e07b3a); color:white; border-radius:20px; font-size:1.1rem; padding:10px;">
+              Make Payment
+            </button>
+          </div>
 
         </div>
+      </div>
+    </div>
+  </div>
 
-
-</div>
 </section>
 {% load static %}
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="{% static 'menu/js/cart_script.js' %}"></script>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>function makePayment() {
+    var allowedZipCodes = ['110092', '110051', '110032', '110053', '110091', '110094', '110095', '110031', '110096', '110093'];
+    var enteredZipCode = $('#zip').val().trim();
+    var totalAmount = parseInt($('#hiddenPrice').val(), 10) || 0;
+
+    if (!data || Object.keys(data).length === 0) {
+        alert("Your cart is empty.");
+        return;
+    }
+
+    if (!(allowedZipCodes.includes(enteredZipCode))) {
+        alert("Delivery is not available for the entered zip code.");
+        return;
+    }
+
+    if (totalAmount <= 0) {
+        alert("Invalid cart amount. Please refresh the cart and try again.");
+        return;
+    }
+
     $.ajax({
         url: "/menu/make-payments/",
         type: 'GET',
         data: {
-            'total_amt': $('#hiddenPrice').val()
+            'total_amt': totalAmount
         },
         success: function (res) {
-            var allowedZipCodes = ['110092', '110051', '110032', '110032', '110053', '110032', '110053', '110091', '110094', '110095', '110032', '110095', '110031', '110031', '110031', '110096', '110053', '110094', '110032', '110051', '110091', '110053', '110053', '110095', '110095', '110094', '110031', '110091', '110091', '110094', '110094', '110051', '110092', '110032', '110093',
-            '110032', '110092', '110093', '110053', '110091', '110096', '110093', '110093', '110095', '110053', '110092', '110095', '110091', '110031', '110031', '110051', '110032', '110094', '110053', '110032', '110032', '110092', '110031', '110032', '110094', '110092', '110032', '110091', '110095', '110096', '110032', '110095', '110053', '110092']
-            var enteredZipCode = $('#zip').val().trim();
-            if (!(allowedZipCodes.includes(enteredZipCode))) {
-                 alert("Delivery is not available for the entered zip code.");
-
-            } else {
-
            var options = {
-                "key": "rzp_test_0R1GmypNngZOql",
+                "key": res.key,
                 "amount": res.payment.amount,
                 "currency": "INR",
                 "name": "Delicious Kitchen",
                 "description": "Pay your Order",
-                "image": "https://example.com/your_logo",
                 "order_id": res.payment.id,
                 "handler": function (response) {
 
@@ -178,11 +192,12 @@
                             'csrfmiddlewaretoken': '{{ csrf_token }}',
                         },
                         success: function (response) {
-                            window.location.href = `http://127.0.0.1:8000/menu/success/`;
+                            localStorage.removeItem('selectedItems');
+                            window.location.href = "/menu/success/";
                         },
-                        error: function (xhr, status, error) {
-                            console.error(error);
-                            alert("Failed to place order. Please try again.");
+                        error: function (xhr) {
+                            var response = xhr.responseJSON || {};
+                            alert(response.error || "Failed to place order. Please try again.");
                         }
                     });
                 },
@@ -190,23 +205,21 @@
 
             var rzp1 = new Razorpay(options);
             rzp1.on('payment.failed', function (response) {
-                alert(response.error.code);
-                alert(response.error.description);
-                alert(response.error.source);
-                alert(response.error.step);
-                alert(response.error.reason);
-                alert(response.error.metadata.order_id);
-                alert(response.error.metadata.payment_id);
+                var error = response.error || {};
+                alert(error.description || "Payment failed. Use Razorpay test details such as success@razorpay in test mode.");
             });
             rzp1.open();
-            }
+        },
+        error: function (xhr) {
+            var response = xhr.responseJSON || {};
+            alert(response.error || "Could not start payment. Please try again.");
         }
     });
 }
 </script>
 <script>
     function scrollToSection() {
-    total_Cart_price=$('#totalPrice').text().split('₹')[1];
+    var total_Cart_price = parseInt($("#totalPrice").text().replace(/[^0-9]/g, ""), 10) || 0;
     $('#hiddenPrice').val(total_Cart_price);
     // Get the target section by its ID
     var targetSection = document.getElementById("scrollTarget");

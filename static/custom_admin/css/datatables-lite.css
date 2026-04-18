@@ -1,0 +1,25 @@
+table.dataTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table.dataTable th,
+table.dataTable td {
+  padding: 0.75rem;
+  border-top: 1px solid #dee2e6;
+}
+
+.dataTables_wrapper {
+  width: 100%;
+}
+
+.dataTables_filter,
+.dataTables_length,
+.dataTables_info,
+.dataTables_paginate {
+  margin: 0.75rem 0;
+}
+
+.dataTables_filter {
+  text-align: right;
+}

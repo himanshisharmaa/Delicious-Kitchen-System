@@ -1,5 +1,9 @@
 {% if messages %}
-<div class="alert alert-success" role="alert">
-    {% for message in messages %} <h4>{{message}}</h4> {% endfor %}
-</div>
+    {% for message in messages %}
+        {% if forloop.last %}
+            <div class="alert {% if message.tags == 'error' %}alert-danger{% else %}alert-{{ message.tags|default:'info' }}{% endif %}" role="alert">
+                <h4>{{ message }}</h4>
+            </div>
+        {% endif %}
+    {% endfor %}
 {% endif %}

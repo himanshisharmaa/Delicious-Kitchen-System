@@ -4,6 +4,7 @@ from django.contrib import messages
 from .models import *
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
+from django.db.models import Q
 
 
 # Create your views here.
@@ -11,15 +12,17 @@ def login_page(request):
     if request.method == 'POST':
 
         data = request.POST
-        mail = data.get('mail')
+        mail = data.get('mail', '').strip()
         passwd = data.get('passwd')
-        print(mail, '--------------', passwd)
+        user_record = User.objects.filter(
+            Q(username__iexact=mail) | Q(email__iexact=mail)
+        ).first()
 
-        if not User.objects.filter(username=mail).exists():
-            messages.error(request, "Invalid username")
+        if user_record is None:
+            messages.error(request, "Invalid email or username")
             return redirect('/')
         else:
-            user = authenticate(username=mail, password=passwd)
+            user = authenticate(username=user_record.username, password=passwd)
 
             if user is None:
                 messages.error(request, 'Invalid Password')

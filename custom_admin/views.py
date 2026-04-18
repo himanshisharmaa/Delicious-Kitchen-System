@@ -10,8 +10,36 @@ from django.db.models import Sum
 from django.db.models import Count
 import json
 from django.utils import timezone
+from functools import wraps
+
+
+def set_single_message(request, level, message):
+    storage = messages.get_messages(request)
+    for _ in storage:
+        pass
+    storage.used = True
+    messages.add_message(request, level, message)
+
+
+def admin_required(view_func):
+    @wraps(view_func)
+    def wrapper(request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            set_single_message(request, messages.ERROR, 'Please login as an admin first')
+            return redirect('/')
+
+        if not request.user.is_staff:
+            logout(request)
+            set_single_message(request, messages.ERROR, 'Admin access required. Please login with an admin account')
+            return redirect('/')
+
+        return view_func(request, *args, **kwargs)
+
+    return wrapper
+
+
 # Create your views here.
-@login_required(login_url='/')
+@admin_required
 def adminPanel(request):
     received_orders = Order.objects.filter(order_status='Received').order_by('-order_placed_time')
 
@@ -55,7 +83,7 @@ def adminPanel(request):
         'order_details': order_details,
         }
     return render(request,'custom_admin/dashboard.html',context)
-@login_required(login_url='/')
+@admin_required
 def add_items(request):
     if request.method=='POST':
         data=request.POST
@@ -70,16 +98,16 @@ def add_items(request):
         messages.info(request,"Successfully Added!!")
         return redirect('/admin/add-items/')
     return render(request,'custom_admin/add_items.html')
-@login_required(login_url='/')
+@admin_required
 def view_items(request):
     queryset=Menu.objects.all()
     context={'menu_items':queryset}
     return render(request,'custom_admin/view_items.html',context)
-@login_required(login_url='/')
+@admin_required
 def delete_item(request,id):
     Menu.objects.get(id=id).delete()
     return redirect('/admin/view-items/')
-@login_required(login_url='/')
+@admin_required
 def update_item(request,id):
     queryset=Menu.objects.get(id=id)
     if request.method=="POST":
@@ -107,15 +135,20 @@ def update_item(request,id):
     context={'item':queryset}
     return render(request,'custom_admin/update_item.html',context)
 
+@admin_required
 def manage_orders(request):
     querySet = Order.objects.all().order_by('-order_placed_time')
     for i in querySet:
         i.cart_items=json.loads(i.cart_items)
 
-    context={'order_details':querySet}
+    context={
+        'order_details': querySet,
+        'updated_order_id': request.GET.get('updated_order'),
+    }
 
     return render(request,'custom_admin/manage_orders.html',context)
 
+@admin_required
 def update_status(request,id):
     if request.method=="POST":
         order_status=request.POST.get('status')
@@ -129,12 +162,12 @@ def update_status(request,id):
             order_status=order_status,
             time_status=timezone.now()
         )
-        messages.success(request,"Order Status Updated Successfully")
-        return redirect('/admin/manage-orders/')
+        return redirect(f'/admin/manage-orders/?updated_order={id}')
     return redirect('/admin/manage-orders/')
 
 
 
+@admin_required
 def pending_orders(request):
     querySet = Order.objects.all().order_by('-order_placed_time')
     for i in querySet:
@@ -142,6 +175,7 @@ def pending_orders(request):
     context = {'order_details': querySet}
     return render(request,'custom_admin/pending_orders.html',context)
 
+@admin_required
 def completed_orders(request):
     querySet = Order.objects.all().order_by('-order_placed_time')
     for i in querySet:
@@ -149,6 +183,7 @@ def completed_orders(request):
     context = {'order_details': querySet}
     return render(request,'custom_admin/completed_orders.html',context)
 
+@admin_required
 def show_queries(request):
     context={'queries':ContactUs.objects.all()}
     return render(request,'custom_admin/query.html',context)

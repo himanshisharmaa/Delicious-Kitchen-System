@@ -53,8 +53,13 @@
           <option value="Out for Delivery">Out for Delivery</option>
           <option value="Delivered">Delivered</option>
         </select>
-                <button type="submit">Submit</button> {% include 'account/message.html' %}
+                <button type="submit">Submit</button>
             </form>
+            {% if updated_order_id == order.order_id %}
+            <div class="alert alert-success mt-2" role="alert">
+                <h4>Order Status Updated Successfully</h4>
+            </div>
+            {% endif %}
         </div>
 
         {% endif %} {% endfor %}

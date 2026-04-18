@@ -1,0 +1,26 @@
+.fa,
+.fas,
+.far,
+.fab {
+  display: inline-block;
+  width: 1.25em;
+  min-width: 1.25em;
+  text-align: center;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.fa-shopping-cart::before { content: "Cart"; font-size: 0.65em; }
+.fa-user::before { content: "User"; font-size: 0.65em; }
+.fa-map-marker-alt::before { content: "Map"; font-size: 0.65em; }
+.fa-phone-alt::before { content: "Tel"; font-size: 0.65em; }
+.fa-envelope::before { content: "Mail"; font-size: 0.65em; }
+.fa-trash::before { content: "Del"; font-size: 0.65em; }
+.fa-plus::before { content: "+"; }
+.fa-check::before { content: "✓"; }
+.fa-bell::before { content: "!"; }
+.fa-bandcamp::before { content: "D"; }
+.fa-twitter::before { content: "T"; }
+.fa-facebook-f::before { content: "f"; }
+.fa-instagram::before { content: "I"; }

@@ -11,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from account.models import UserProfile
 import razorpay
+from razorpay.errors import BadRequestError, GatewayError, ServerError, SignatureVerificationError
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 @login_required(login_url='/')
@@ -33,6 +34,7 @@ def add_to_cart(request):
     context = {'user_details': querySet}
     return render(request,'menu/add_to_cart.html',context)
 
+@login_required(login_url='/')
 def contact(request):
     if request.method=="POST":
         data=request.POST
@@ -65,17 +67,34 @@ def logout_page(request):
     return redirect('/')
 
 
+@login_required(login_url='/')
 @csrf_exempt
 def make_payment(request):
-    print(request.GET)
-    amt=int(request.GET['total_amt'])
-    print(amt)
+    if not settings.KEY or not settings.SECRET:
+        return JsonResponse({
+            'error': 'Razorpay keys are missing. Add RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET to .env.'
+        }, status=500)
+
+    try:
+        amt = int(str(request.GET.get('total_amt', '')).strip())
+    except ValueError:
+        return JsonResponse({'error': 'Invalid payment amount.'}, status=400)
+
+    if amt <= 0:
+        return JsonResponse({'error': 'Payment amount must be greater than zero.'}, status=400)
+
     client=razorpay.Client(auth=(settings.KEY,settings.SECRET))
 
-    payment=client.order.create({'amount':amt*100,'currency':'INR','payment_capture':1})
+    try:
+        payment=client.order.create({'amount':amt*100,'currency':'INR','payment_capture':1})
+    except BadRequestError as error:
+        return JsonResponse({'error': str(error)}, status=400)
+    except (ServerError, GatewayError):
+        return JsonResponse({'error': 'Razorpay is temporarily unavailable. Please try again.'}, status=502)
 
-    context={'payment':payment}
+    context={'payment':payment, 'key': settings.KEY}
     return JsonResponse(context)
+@login_required(login_url='/')
 def liveSearchForm(request):
     if 'term' in request.GET:
         qs=Menu.objects.filter(item_name__icontains=request.GET.get('term'))
@@ -96,6 +115,7 @@ def liveSearchForm(request):
         return JsonResponse(res,safe=False)
     return JsonResponse({})
 
+@login_required(login_url='/')
 def order_complete(request):
     if request.method == 'POST':
         fullName = request.POST.get('fullName')
@@ -110,6 +130,17 @@ def order_complete(request):
         order_id = request.POST.get('order_id')
         order_signature = request.POST.get('order_signature')
         user = request.user
+        client = razorpay.Client(auth=(settings.KEY, settings.SECRET))
+
+        try:
+            client.utility.verify_payment_signature({
+                'razorpay_order_id': order_id,
+                'razorpay_payment_id': payment_id,
+                'razorpay_signature': order_signature,
+            })
+        except SignatureVerificationError:
+            return JsonResponse({'error': 'Payment verification failed.'}, status=400)
+
         full_address=f'{address} {city} ,{zip}'
         order_time=timezone.now()
         Order.objects.create(
@@ -134,12 +165,14 @@ def order_complete(request):
         return JsonResponse({'success': True})
     return JsonResponse({'error': 'Method not allowed'}, status=405)
 
+@login_required(login_url='/')
 def success(request):
     orders = Order.objects.filter(user=request.user.id)
     latest_order = orders.order_by('-order_placed_time').first()
     context={'order_details':latest_order}
 
     return render(request,'menu/success.html',context)
+@login_required(login_url='/')
 def show_orders(request):
     orders = Order.objects.filter(user=request.user.id)
     latest_order = orders.order_by('-order_placed_time')
@@ -149,8 +182,9 @@ def show_orders(request):
     context = {'order_details': latest_order}
     return render(request,'menu/order.html',context)
 
+@login_required(login_url='/')
 def order_details(request,id):
-    order_items=Order.objects.get(order_id=id)
+    order_items=Order.objects.get(order_id=id, user=request.user)
     order_items.cart_items=json.loads(order_items.cart_items)
     order=OrderStatus.objects.filter(order_id=id)
     data={}

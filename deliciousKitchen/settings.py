@@ -12,8 +12,28 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+import mimetypes
+
+mimetypes.add_type("text/css", ".css", True)
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+def load_env_file(path):
+    if not path.exists():
+        return
+
+    with path.open() as env_file:
+        for line in env_file:
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+
+            key, value = line.split("=", 1)
+            os.environ.setdefault(key.strip(), value.strip().strip('"').strip("'"))
+
+
+load_env_file(BASE_DIR / ".env")
 
 
 # Quick-start development settings - unsuitable for production
@@ -85,8 +105,8 @@ DATABASES = {
         "NAME": 'deliciouskitchen',
         "HOST":'127.0.0.1',
         "PORT":'3306',
-        'USER':'myKitchen',
-        'PASSWORD':'delicious',
+        'USER':'root',
+        'PASSWORD':'',
     }
 }
 
@@ -142,6 +162,6 @@ EMAIL_HOST_USER="kitchendelicious791@gmail.com"
 EMAIL_HOST_PASSWORD="deliciouskitchenSystem"
 EMAIL_DEBUG = True
 
-KEY="rzp_test_0R1GmypNngZOql"
+KEY = os.environ.get("RAZORPAY_KEY_ID", "")
 
-SECRET="YQyiHVE0WoWWRJqpoIAAOED7"
+SECRET = os.environ.get("RAZORPAY_KEY_SECRET", "")
