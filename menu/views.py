@@ -11,9 +11,22 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from account.models import UserProfile
 import razorpay
+import certifi
 from razorpay.errors import BadRequestError, GatewayError, ServerError, SignatureVerificationError
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
+
+
+def get_razorpay_client():
+    client = razorpay.Client(auth=(settings.KEY, settings.SECRET))
+
+    # PyInstaller builds can miss Razorpay's bundled CA file path.
+    if hasattr(client, "session"):
+        client.session.verify = certifi.where()
+
+    return client
+
+
 @login_required(login_url='/')
 def menu_page(request):
     querySet=Menu.objects.all()
@@ -83,7 +96,7 @@ def make_payment(request):
     if amt <= 0:
         return JsonResponse({'error': 'Payment amount must be greater than zero.'}, status=400)
 
-    client=razorpay.Client(auth=(settings.KEY,settings.SECRET))
+    client = get_razorpay_client()
 
     try:
         payment=client.order.create({'amount':amt*100,'currency':'INR','payment_capture':1})
@@ -130,7 +143,7 @@ def order_complete(request):
         order_id = request.POST.get('order_id')
         order_signature = request.POST.get('order_signature')
         user = request.user
-        client = razorpay.Client(auth=(settings.KEY, settings.SECRET))
+        client = get_razorpay_client()
 
         try:
             client.utility.verify_payment_signature({
